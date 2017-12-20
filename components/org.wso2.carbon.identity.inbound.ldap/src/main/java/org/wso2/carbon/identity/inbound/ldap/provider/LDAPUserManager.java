@@ -54,18 +54,15 @@ public class LDAPUserManager {
 
             String username = ldapUser.getUserName();
 
-
             LDAPAttributeMapper ldapAttributeMapper = new LDAPAttributeMapper();
             HashMap<String, String> claimsMap = (HashMap<String, String>) ldapAttributeMapper.getAddUserClaimsMap
                     (ldapUser.getUserAttributes());
-
 
             if (carbonUM.isExistingUser(username)) {
                 String error = "User with the name : " + username + " already exist in the system";
                 log.info(error);
                 throw new IdentityLdapException(error);
             }
-
 
             if (claimsMap.containsKey(LDAPConstants.LDAPSchemaConstants.PASSWORD_URI)) {
                 claimsMap.remove(LDAPConstants.LDAPSchemaConstants.PASSWORD_URI);
@@ -77,14 +74,11 @@ public class LDAPUserManager {
         } catch (Exception e) {
             throw new IdentityLdapException("Error occurred while adding user", e);
         }
-
     }
 
     public void deleteUser(String userId) throws Exception {
         try {
-
             // Here assume (since id is unique per user) only one user exists for a given id
-
             carbonUM.deleteUser(userId);
             log.info("User: " + userId + " is deleted through LDAP.");
 

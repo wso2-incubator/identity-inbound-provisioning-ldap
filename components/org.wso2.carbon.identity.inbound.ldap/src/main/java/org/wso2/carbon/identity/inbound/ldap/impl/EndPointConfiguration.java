@@ -101,7 +101,6 @@ public class EndPointConfiguration {
         if (saslHostName == null) {
             return;
         }
-
         this.saslHostName = saslHostName;
     }
 
@@ -113,7 +112,6 @@ public class EndPointConfiguration {
         if (saslPrincipalName == null) {
             return;
         }
-
         this.saslPrincipalName = saslPrincipalName;
     }
 
@@ -125,7 +123,6 @@ public class EndPointConfiguration {
         if (instanceId == null) {
             return;
         }
-
         this.instanceId = instanceId;
     }
 
@@ -137,7 +134,6 @@ public class EndPointConfiguration {
         if (ldapPort == -1) {
             return;
         }
-
         this.ldapPort = ldapPort;
     }
 
@@ -149,7 +145,6 @@ public class EndPointConfiguration {
         if (workingDirectory == null) {
             return;
         }
-
         this.workingDirectory = workingDirectory;
     }
 }

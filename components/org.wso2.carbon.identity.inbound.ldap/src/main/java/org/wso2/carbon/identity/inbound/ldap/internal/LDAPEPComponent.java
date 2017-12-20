@@ -16,7 +16,6 @@
 
 package org.wso2.carbon.identity.inbound.ldap.internal;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.service.component.ComponentContext;
@@ -169,7 +168,6 @@ public class LDAPEPComponent {
 
         this.ldapServer.start();
     }
-
 
     @Reference(
             name = "user.realmservice.default",

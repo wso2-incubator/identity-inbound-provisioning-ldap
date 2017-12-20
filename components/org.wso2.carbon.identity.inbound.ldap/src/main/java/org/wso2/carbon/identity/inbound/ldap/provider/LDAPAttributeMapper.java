@@ -41,7 +41,6 @@ public class LDAPAttributeMapper {
             String attributeClaimUri = ldapClaimUri.append(attributkey).toString();
             claimsMap.put(attributeClaimUri, attributeValue);
         }
-
         return claimsMap;
     }
 
@@ -55,8 +54,6 @@ public class LDAPAttributeMapper {
                 userAttributes.put(attrId, attribute.getValue().toString());
             }
         }
-
         return userAttributes;
-
     }
 }

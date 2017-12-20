@@ -60,7 +60,6 @@ public class ConfigurartionBuilder {
         }
     }
 
-
     public void buildLDAPEndpointConfigurartion() {
         Element ele = null;
         ele = (Element) ldapEndpointConfiguration.item(0);
@@ -79,7 +78,6 @@ public class ConfigurartionBuilder {
         endPointConfiguration.setMaxPDUSize(getIntegerValue(getValue(ele, "maxPDUSize")));
         connectionPassword = ele.getElementsByTagName("connectionPassword").item(0).getTextContent();
     }
-
 
     private int getIntegerValue(String value) {
         if (value != null) {

@@ -29,7 +29,6 @@ import org.wso2.carbon.identity.inbound.ldap.utils.IdentityLdapException;
 
 public class WSO2UserManager {
 
-
     private static final Log log = LogFactory.getLog(WSO2UserManager.class);
     private LDAPUserManager ldapUserManager = null;
     private IdentityLDAPManager identityLDAPManager = new IdentityLDAPManager();
@@ -46,9 +45,7 @@ public class WSO2UserManager {
         } catch (Exception ex) {
             String msg = "An error occurred while performing add operation";
             throw new IdentityLdapException(msg, ex);
-
         }
-
     }
 
     public void deleteUser(DeleteOperationContext deleteOperationContext) throws IdentityLdapException {
@@ -61,7 +58,6 @@ public class WSO2UserManager {
             String msg = "An error occurred while performing delete operation";
             throw new IdentityLdapException(msg, ex);
         }
-
     }
 
     private String getDeleteUsername(String dn) {
@@ -70,7 +66,6 @@ public class WSO2UserManager {
         if (splitDn != null) {
             uid = splitDn[0].split("=");
         }
-
         return uid[1];
     }
 

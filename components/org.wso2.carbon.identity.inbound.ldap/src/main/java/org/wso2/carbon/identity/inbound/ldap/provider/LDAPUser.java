@@ -58,5 +58,4 @@ public class LDAPUser {
             this.userAttributes.put(attrId, attrValue);
         }
     }
-
 }

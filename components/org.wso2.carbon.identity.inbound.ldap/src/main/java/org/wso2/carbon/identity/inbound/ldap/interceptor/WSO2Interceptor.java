@@ -42,16 +42,10 @@ public class WSO2Interceptor extends BaseInterceptor {
             opContext.getSession();
             WSO2UserManager wso2UserManager = new WSO2UserManager();
             wso2UserManager.addUser(opContext);
-
-            // Here ldapSession we use for the write response message
-            // LdapSession[] ldapSessions=ApacheLDAPServer.getApacheLDAPServer().getLdapSessions();
-            // LdapSession ldapSession=ldapSessions[0];
-            // ldapSession.getIoSession().write(msg);
         } catch (Exception e) {
             String msg = "Error occur in AddOperationContext";
             log.error(msg, e);
         }
-
     }
 
     public EntryFilteringCursor search(NextInterceptor next, SearchOperationContext opContext) throws Exception {
@@ -70,8 +64,6 @@ public class WSO2Interceptor extends BaseInterceptor {
             String msg = "Error occur in DeleteOperationContext";
             log.error(msg, e);
         }
-
-
     }
 
 }

@@ -31,7 +31,6 @@ public class IdentityLDAPManager {
 
     private static final Log log = LogFactory.getLog(IdentityLDAPManager.class);
 
-
     public LDAPUserManager getUserManager(String username) throws Exception {
         LDAPUserManager ldapUserManager = null;
         String tenantDomain = MultitenantUtils.getTenantDomain(username);
@@ -51,7 +50,6 @@ public class IdentityLDAPManager {
                     //get claim manager for manipulating attributes
                     claimManager = (ClaimManager) userRealm.getClaimManager();
 
-
                     String authenticatedUser = PrivilegedCarbonContext.getThreadLocalCarbonContext().getUsername();
                     if (authenticatedUser == null) {
                         PrivilegedCarbonContext.getThreadLocalCarbonContext().setUsername(tenantLessUserName);
@@ -65,9 +63,7 @@ public class IdentityLDAPManager {
                             claimManager);
                     // ldapUserManager.createUser();
                 }
-
             }
-
 
         } catch (Exception ex) {
             throw new IdentityLdapException("Error occur while getting userstore manager", ex);

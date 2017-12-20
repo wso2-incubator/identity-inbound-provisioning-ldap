@@ -43,7 +43,6 @@ public class LDAPAttributeMapperTest {
         ldapAttrSet.put("scimId", "e8c029b1-e397-412e-87db-2125bb3ada56");
         HashMap claimMapExpected = (HashMap) ldapAttributeMapper.getAddUserClaimsMap(ldapAttrSet);
 
-
         HashMap claimMap = new HashMap();
         claimMap.put(LDAPConstants.LDAPSchemaConstants.CN_URI, "testcn");
         claimMap.put(LDAPConstants.LDAPSchemaConstants.LAST_NAME_URI, "testsn");

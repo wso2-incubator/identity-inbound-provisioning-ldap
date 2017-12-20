@@ -74,8 +74,5 @@ public class LDAPConstants {
         public static final String MODIFIED_TIME = "lastModifiedDate";
         public static final String SCIM_ID_URI = "http://wso2.org/ldap/claim/scimId";
         public static final String SCIM_ID = "scimId";
-
-
     }
-
 }

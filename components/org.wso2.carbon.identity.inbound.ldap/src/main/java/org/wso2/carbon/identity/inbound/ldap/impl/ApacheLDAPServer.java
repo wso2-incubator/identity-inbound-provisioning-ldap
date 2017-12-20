@@ -57,7 +57,6 @@ import java.util.Map;
  */
 public class ApacheLDAPServer implements LDAPServer {
 
-
     private static final Log log = LogFactory.getLog(ApacheLDAPServer.class);
     private static ApacheLDAPServer apacheLDAPServer = new ApacheLDAPServer();
     Map<String, MechanismHandler> mechanismHandlerMap;
@@ -97,7 +96,6 @@ public class ApacheLDAPServer implements LDAPServer {
         }
 
     }
-
 
     @Override
     public void start()
@@ -325,15 +323,11 @@ public class ApacheLDAPServer implements LDAPServer {
 
         // Add interceptors
         List<Interceptor> list = this.service.getInterceptors();
-        // list.add(new KeyDerivationInterceptor());
         list.add(0, new WSO2Interceptor());
-
         this.service.setInterceptors(list);
-
     }
 
-    protected void initializeLDAPServer()
-            throws Exception {
+    protected void initializeLDAPServer() throws Exception {
 
         try {
             if (null == this.service || null == this.endPointConfigurations) {
@@ -380,10 +374,5 @@ public class ApacheLDAPServer implements LDAPServer {
 
         this.ldapServer.setSaslMechanismHandlers(mechanismHandlerMap);
     }
-
-    /* This method we can use for the get ldapSession
-    public LdapSession[] getLdapSessions(){
-        return ldapServer.getLdapSessionManager().getSessions();
-    }*/
 
 }

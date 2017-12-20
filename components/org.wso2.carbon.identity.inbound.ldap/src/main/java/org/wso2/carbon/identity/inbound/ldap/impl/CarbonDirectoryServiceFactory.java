@@ -65,8 +65,6 @@ class CarbonDirectoryServiceFactory implements DirectoryServiceFactory {
     private String schemaZipStore;
 
     /* default access */
-
-    @SuppressWarnings({"unchecked"})
     CarbonDirectoryServiceFactory() {
         try {
             // creating the instance here so that
