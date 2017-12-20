@@ -35,12 +35,12 @@ public class WSO2UserManager {
 
     public void addUser(AddOperationContext addOperationContext) throws IdentityLdapException {
         try {
-            ldapUserManager = identityLDAPManager.getUserManager("admin");
             Entry entry = addOperationContext.getEntry();
             LDAPUser ldapUser = new LDAPUser();
             ldapUser.setUsername(entry.get(LDAPConstants.LDAPSchemaConstants.USERNAME).get().getString());
             ldapUser.setPassword(entry.get(LDAPConstants.LDAPSchemaConstants.PASSWORD).get().getString());
             ldapUser.setUserAttributes(entry);
+            ldapUserManager = identityLDAPManager.getUserManager();
             ldapUserManager.createUser(ldapUser);
         } catch (Exception ex) {
             String msg = "An error occurred while performing add operation";
@@ -50,9 +50,9 @@ public class WSO2UserManager {
 
     public void deleteUser(DeleteOperationContext deleteOperationContext) throws IdentityLdapException {
         try {
-            ldapUserManager = identityLDAPManager.getUserManager("admin");
             String dn = deleteOperationContext.getDn().toString();
             String username = getDeleteUsername(dn);
+            ldapUserManager = identityLDAPManager.getUserManager();
             ldapUserManager.deleteUser(username);
         } catch (Exception ex) {
             String msg = "An error occurred while performing delete operation";

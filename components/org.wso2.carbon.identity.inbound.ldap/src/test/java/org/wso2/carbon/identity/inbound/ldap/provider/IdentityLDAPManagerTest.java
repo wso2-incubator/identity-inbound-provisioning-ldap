@@ -77,7 +77,7 @@ public class IdentityLDAPManagerTest extends PowerMockTestCase {
         when(realmService.getTenantUserRealm(anyInt())).thenReturn(userRealm);
         when(userRealm.getClaimManager()).thenReturn(claimManager);
         String authenticatedUser = PrivilegedCarbonContext.getThreadLocalCarbonContext().getUsername();
-        identityLDAPManager.getUserManager("admin");
+        identityLDAPManager.getUserManager();
         assertNotNull(authenticatedUser);
         assertEquals(authenticatedUser, "admin", "usernames are not matched");
 

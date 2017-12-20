@@ -31,8 +31,9 @@ public class IdentityLDAPManager {
 
     private static final Log log = LogFactory.getLog(IdentityLDAPManager.class);
 
-    public LDAPUserManager getUserManager(String username) throws Exception {
+    public LDAPUserManager getUserManager() throws Exception {
         LDAPUserManager ldapUserManager = null;
+        String username="carbon.super";
         String tenantDomain = MultitenantUtils.getTenantDomain(username);
         String tenantLessUserName = MultitenantUtils.getTenantAwareUsername(username);
 

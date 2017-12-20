@@ -38,8 +38,6 @@ public class WSO2Interceptor extends BaseInterceptor {
 
     public void add(NextInterceptor next, AddOperationContext opContext) throws Exception {
         try {
-            opContext.getName();
-            opContext.getSession();
             WSO2UserManager wso2UserManager = new WSO2UserManager();
             wso2UserManager.addUser(opContext);
         } catch (Exception e) {
