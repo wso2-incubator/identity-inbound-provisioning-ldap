@@ -2,8 +2,7 @@
 > LDAP is a core protocol that is used to store user, role, and group information.Identity server already supports connecting to LDAP supported authz systems for authentication and authorization. The idea of this project is to make IS itself act as a LDAP protocol provider.
 ## Goals
 > The general model adopted by this protocol is one of clients performing protocol operations against servers.  In this model, a client send a protocol request describing the operation to be performed to a server.  The server is then responsible for performing the necessary operation(s) in the Directory.Protocol operation are exchanged at the LDAP message layer.For the purposes of protocol exchanges, all protocol operations are encapsulated in a common envelope, the LDAPMessage.
-
-Here capture the LDAPmessage  at LDAP endpoint and Identify the message element and map it into java objects. IS  can use these objects to do operation  with JDBC, MySQL,  LDAP or any other type of database.
+Here capture the LDAPmessage  at LDAP endpoint and Identify the message element and map it into java objects. Identity server  can use these objects to do operation  with JDBC, MySQL,  LDAP or any other type of database.
 
 ## Approach
 > Describe how you are implementing the solutions. Include an animated GIF or screenshot if the change affects the UI (email documentation@wso2.com to review all UI text). Include a link to a Markdown file or Google doc if the feature write-up is too long to paste here.
