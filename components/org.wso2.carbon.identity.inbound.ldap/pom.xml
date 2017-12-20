@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.wso2.carbon.identity.inbound.provisioning.ldap</groupId>
+        <artifactId>identity-inbound-provisioning-ldap</artifactId>
+        <relativePath>../../pom.xml</relativePath>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>identity-inbound-provisioning-ldap</groupId>
+    <packaging>bundle</packaging>
+    <artifactId>org.wso2.carbon.identity.inbound.ldap</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.identity.framework</groupId>
+            <artifactId>org.wso2.carbon.identity.base</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.orbit.org.apache.directory</groupId>
+            <artifactId>apacheds</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <artifactId>apacheds-protocol-ldap</artifactId>
+            <groupId>org.apache.directory.server</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>apacheds-protocol-kerberos</artifactId>
+            <groupId>org.apache.directory.server</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>apacheds-interceptor-kerberos</artifactId>
+            <groupId>org.apache.directory.server</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>apacheds-core-annotations</artifactId>
+            <groupId>org.apache.directory.server</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>api-ldap-model</artifactId>
+            <groupId>org.apache.directory.api</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>api-util</artifactId>
+            <groupId>org.apache.directory.api</groupId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.w3c</groupId>
+            <artifactId>dom</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wso2.carbon.identity</groupId>
+            <artifactId>org.wso2.carbon.identity.application.common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wso2.carbon.identity</groupId>
+            <artifactId>org.wso2.carbon.identity.application.mgt</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--Test Dependencies-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <classifier>runtime</classifier>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.powermock/powermock-module-testng -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Private-Package>
+                            org.wso2.carbon.identity.inbound.ldap.impl.*,
+                            org.wso2.carbon.identity.inbound.ldap.interceptor.*,
+                            org.wso2.carbon.identity.inbound.ldap.utils.*,
+                            org.wso2.carbon.identity.inbound.ldap.provider.*,
+                            org.wso2.carbon.identity.inbound.ldap.internal.*,
+                            apachedsServer.*;
+                        </Private-Package>
+                        <Import-Package>
+                            javax.naming,
+                            javax.naming.ldap,
+                            javax.naming.directory,
+                            javax.xml.namespace,
+                            javax.xml.stream,
+                            org.w3c.dom,
+
+                            org.slf4j; version="${org.slf4j.imp.pkg.version.range}",
+
+                            org.apache.axiom.*; version="${axiom.osgi.version.range}",
+                            org.apache.log4j; version="${carbon.logging.imp.pkg.version.range}",
+                            org.apache.commons.io; version="${commons.io.wso2.osgi.version.range}",
+
+                            org.apache.directory.server.*; version="${apacheds.imp.pkg.version.range}",
+                            org.apache.directory.shared.*; version="${apacheds.imp.pkg.version.range}",
+
+                            org.osgi.framework; version="${osgi.framework.imp.pkg.version.range}",
+                            org.osgi.service.component.*;version="${osgi.service.component.imp.pkg.version.range}",
+
+
+                            org.wso2.carbon.identity.application.*;version="${org.wso2.carbon.identity.application.version}",
+                            org.wso2.carbon.user.core.*;version="${carbon.kernel.package.import.version.range}",
+                            org.wso2.carbon.utils;version="${carbon.kernel.package.import.version.range}",
+                            org.wso2.carbon.user.api; version="${carbon.user.api.imp.pkg.version.range}",
+                            org.wso2.carbon.identity.base;
+                            version="${carbon.identity.framework.package.import.version.range}"
+                        </Import-Package>
+                        <Export-Package>
+                            !org.wso2.carbon.identity.inbound.ldap.impl.*,
+                            !org.wso2.carbon.identity.inbound.ldap.interceptor.*,
+                            !org.wso2.carbon.identity.inbound.ldap.utils.*,
+                            !org.wso2.carbon.identity.inbound.ldap.provider.*,
+                            !org.wso2.carbon.identity.inbound.ldap.internal.*,
+                            !apachedsServer.*,
+                            org.wso2.carbon.identity.inbound.ldap.*;
+                            version="${org.wso2.carbon.identity.inbound.ldap.package.export.version}"
+                        </Export-Package>
+                        <DynamicImport-Package>*</DynamicImport-Package>
+                        <DeployBefore>UserCore</DeployBefore>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-prepare-agent-integration</id>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report-integration</id>
+                        <goals>
+                            <goal>report-integration</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule implementation="org.jacoco.maven.RuleConfiguration">
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>COMPLEXITY</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.00</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
