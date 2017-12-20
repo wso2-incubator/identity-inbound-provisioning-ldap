@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LDAPEndPointConfig>
+  <enable>true</enable>
+  <port>10390</port>
+  <instanceId>default</instanceId>
+  <connectionPassword>admin</connectionPassword>
+  <workingDirectory>.</workingDirectory>
+  <allowAnonymousAccess>false</allowAnonymousAccess>
+  <accessControlEnabled>true</accessControlEnabled>
+  <denormalizeOpAttrsEnabled>false</denormalizeOpAttrsEnabled>
+  <maxPDUSize>2000000</maxPDUSize>
+  <saslHostName>localhost</saslHostName>
+  <saslPrincipalName>ldap/localhost@EXAMPLE.COM</saslPrincipalName>
+</LDAPEndPointConfig>
