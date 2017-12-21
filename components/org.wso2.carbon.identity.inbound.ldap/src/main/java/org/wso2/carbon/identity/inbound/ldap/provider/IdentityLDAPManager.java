@@ -27,6 +27,9 @@ import org.wso2.carbon.user.core.claim.ClaimManager;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.utils.multitenancy.MultitenantUtils;
 
+/**
+ * Class which use for, to get carbon user store manager.
+ */
 public class IdentityLDAPManager {
 
     private static final Log log = LogFactory.getLog(IdentityLDAPManager.class);
