@@ -184,9 +184,15 @@ public class ApacheLDAPServer implements LDAPServer {
 
     @Override
     public String getConnectionDomainName()
-            throws Exception {
+            throws IdentityLdapException {
 
-        LdapPrincipal adminPrinciple = getAdminPrinciple();
+        LdapPrincipal adminPrinciple = null;
+        try {
+            adminPrinciple = getAdminPrinciple();
+        } catch (Exception e) {
+            String msg="Can not get the connection domain name" ;
+            throw new IdentityLdapException(msg);
+        }
         return adminPrinciple.getClonedName().getName();
     }
 
@@ -195,13 +201,7 @@ public class ApacheLDAPServer implements LDAPServer {
 
         if (this.service != null) {
             CoreSession adminSession;
-            try {
-                adminSession = this.service.getAdminSession();
-            } catch (Exception e) {
-                String msg = "An error occurred while retraining admin session.";
-                log.error(msg, e);
-                throw new Exception(msg, e);
-            }
+                adminSession = getAdminSession(this.service);
             if (adminSession != null) {
                 LdapPrincipal adminPrincipal = adminSession.getAuthenticatedPrincipal();
                 if (adminPrincipal != null) {
@@ -210,19 +210,19 @@ public class ApacheLDAPServer implements LDAPServer {
                     String msg = "Could not retrieve admin principle. Failed changing connection " +
                             "user password.";
                     log.error(msg);
-                    throw new Exception(msg);
+                    throw new IdentityLdapException(msg);
                 }
             } else {
                 String msg = "Directory admin session is null. The LDAP server may not have " +
                         "started yet.";
                 log.error(msg);
-                throw new Exception(msg);
+                throw new IdentityLdapException(msg);
             }
         } else {
 
             String msg = "Directory service is null. The LDAP server may not have started yet.";
             log.error(msg);
-            throw new Exception(msg);
+            throw new IdentityLdapException(msg);
         }
 
     }
@@ -233,13 +233,9 @@ public class ApacheLDAPServer implements LDAPServer {
 
         if (this.service != null) {
             CoreSession adminSession;
-            try {
-                adminSession = this.service.getAdminSession();
-            } catch (Exception e) {
-                String msg = "An error occurred while retraining admin session.";
-                log.error(msg, e);
-                throw new Exception(msg, e);
-            }
+
+                adminSession = getAdminSession(this.service);
+
             if (adminSession != null) {
                 LdapPrincipal adminPrincipal = adminSession.getAuthenticatedPrincipal();
                 if (adminPrincipal != null) {
@@ -251,11 +247,6 @@ public class ApacheLDAPServer implements LDAPServer {
                     try {
                         messageDigest = MessageDigest.getInstance(
                                 ConfigurationConstants.ADMIN_PASSWORD_ALGORITHM);
-                    } catch (NoSuchAlgorithmException e) {
-                        throw new Exception(
-                                "Could not find digest algorithm - " +
-                                        ConfigurationConstants.ADMIN_PASSWORD_ALGORITHM, e);
-                    }
                     messageDigest.update(password.getBytes());
                     byte[] bytes = messageDigest.digest();
                     String hash = Base64.encode(bytes);
@@ -273,40 +264,52 @@ public class ApacheLDAPServer implements LDAPServer {
 
                     List<Modification> modifiedList = new ArrayList<Modification>();
                     modifiedList.add(serverModification);
-
-                    try {
                         adminSession.modify(adminPrincipal.getClonedName(), modifiedList);
+                    } catch (NoSuchAlgorithmException e) {
+                        throw new IdentityLdapException(
+                                "Could not find digest algorithm - " +
+                                        ConfigurationConstants.ADMIN_PASSWORD_ALGORITHM, e);
                     } catch (Exception e) {
                         String msg = "Failed changing connection user password.";
                         log.error(msg, e);
-                        throw new Exception(msg, e);
+                        throw new IdentityLdapException(msg, e);
                     }
 
                 } else {
                     String msg = "Could not retrieve admin principle. Failed changing connection " +
                             "user password.";
                     log.error(msg);
-                    throw new Exception(msg);
+                    throw new IdentityLdapException(msg);
                 }
             } else {
                 String msg = "Directory admin session is null. The LDAP server may not have " +
                         "started yet.";
                 log.error(msg);
-                throw new Exception(msg);
+                throw new IdentityLdapException(msg);
             }
         } else {
             String msg = "Directory service is null. The LDAP server may not have started yet.";
             log.error(msg);
-            throw new Exception(msg);
+            throw new IdentityLdapException(msg);
         }
 
     }
 
+    private CoreSession getAdminSession(DirectoryService service) throws Exception {
+        try {
+            return service.getAdminSession();
+        } catch (Exception e) {
+            String msg = "An error occurred while retraining admin session.";
+            log.error(msg, e);
+            throw new IdentityLdapException(msg, e);
+        }
+    }
+
     private void configureDirectoryService()
-            throws Exception {
+            throws IdentityLdapException {
 
         if (null == this.endPointConfigurations) {
-            throw new Exception("Directory service is not initialized.");
+            throw new IdentityLdapException("Directory service is not initialized.");
         }
 
         System.setProperty("workingDirectory", this.endPointConfigurations.getWorkingDirectory());
@@ -327,7 +330,7 @@ public class ApacheLDAPServer implements LDAPServer {
         this.service.setInterceptors(list);
     }
 
-    protected void initializeLDAPServer() throws Exception {
+    protected void initializeLDAPServer() throws IdentityLdapException {
 
         try {
             if (null == this.service || null == this.endPointConfigurations) {
@@ -349,7 +352,7 @@ public class ApacheLDAPServer implements LDAPServer {
             setupSaslMechanisms();
 
         } catch (Exception e) {
-            throw new Exception("can not add the extension handlers ", e);
+            throw new IdentityLdapException("can not add the extension handlers ", e);
         }
     }
 

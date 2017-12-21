@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.context.PrivilegedCarbonContext;
 import org.wso2.carbon.identity.inbound.ldap.utils.IdentityLdapException;
+import org.wso2.carbon.user.core.UserStoreException;
 import org.wso2.carbon.user.core.UserStoreManager;
 import org.wso2.carbon.user.core.claim.ClaimManager;
 import org.wso2.carbon.utils.multitenancy.MultitenantUtils;
@@ -49,7 +50,7 @@ public class LDAPUserManager {
         carbonContext.setUsername(MultitenantUtils.getTenantAwareUsername("carbon.super"));
     }
 
-    public void createUser(LDAPUser ldapUser) throws Exception { //LDAPUser ldapuser, boolean isBulkAdd
+    public void createUser(LDAPUser ldapUser) throws IdentityLdapException { //LDAPUser ldapuser, boolean isBulkAdd
         try {
 
             String username = ldapUser.getUserName();
@@ -71,18 +72,18 @@ public class LDAPUserManager {
             carbonUM.addUser(ldapUser.getUserName(), ldapUser.getPassword(), null, claimsMap, null);
             log.info("User: " + ldapUser.getUserName() + " is created through LDAP protocol.");
 
-        } catch (Exception e) {
+        } catch (UserStoreException e) {
             throw new IdentityLdapException("Error occurred while adding user", e);
         }
     }
 
-    public void deleteUser(String userId) throws Exception {
+    public void deleteUser(String userId) throws IdentityLdapException {
         try {
             // Here assume (since id is unique per user) only one user exists for a given id
             carbonUM.deleteUser(userId);
             log.info("User: " + userId + " is deleted through LDAP.");
 
-        } catch (Exception ex) {
+        } catch (UserStoreException ex) {
             throw new IdentityLdapException("Error occurred while deleting user", ex);
         }
     }
