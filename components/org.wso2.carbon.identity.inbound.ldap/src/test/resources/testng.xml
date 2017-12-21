@@ -21,7 +21,7 @@
     <test name="OAuth2EndpointTestsWithDebugEnabled" preserve-order="true" parallel="false">
         <parameter name="log-level" value="debug"/>
         <classes>
-            <class name="org.wso2.carbon.identity.inbound.ldap.utils.ConfigurartionBuilderTest" />
+            <class name="org.wso2.carbon.identity.inbound.ldap.utils.ConfigurationBuilderTest" />
             <class name="org.wso2.carbon.identity.inbound.ldap.provider.IdentityLDAPManagerTest" />
             <class name="org.wso2.carbon.identity.inbound.ldap.provider.LDAPAttributeMapperTest" />
         </classes>

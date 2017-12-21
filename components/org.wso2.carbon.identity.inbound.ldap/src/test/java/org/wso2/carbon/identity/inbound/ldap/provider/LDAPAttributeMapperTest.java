@@ -16,9 +16,12 @@
 
 package org.wso2.carbon.identity.inbound.ldap.provider;
 
-import org.junit.Test;
+
+
+import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -41,7 +44,7 @@ public class LDAPAttributeMapperTest {
         ldapAttrSet.put("objectclass", "top");
         ldapAttrSet.put("mobile", "0717463047");
         ldapAttrSet.put("scimId", "e8c029b1-e397-412e-87db-2125bb3ada56");
-        HashMap claimMapExpected = (HashMap) ldapAttributeMapper.getAddUserClaimsMap(ldapAttrSet);
+        Map claimMapExpected = ldapAttributeMapper.getAddUserClaimsMap(ldapAttrSet);
 
         HashMap claimMap = new HashMap();
         claimMap.put(LDAPConstants.LDAPSchemaConstants.CN_URI, "testcn");

@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 import org.wso2.carbon.identity.inbound.ldap.impl.ApacheLDAPServer;
 import org.wso2.carbon.identity.inbound.ldap.impl.EndPointConfiguration;
 import org.wso2.carbon.identity.inbound.ldap.impl.LDAPServer;
-import org.wso2.carbon.identity.inbound.ldap.utils.ConfigurartionBuilder;
+import org.wso2.carbon.identity.inbound.ldap.utils.ConfigurationBuilder;
 import org.wso2.carbon.identity.inbound.ldap.utils.IdentityLdapException;
 import org.wso2.carbon.user.core.service.RealmService;
 
@@ -51,18 +51,18 @@ public class LDAPEPComponent {
 
             /*Read the ldap-org.wso2.carbon.identity.inbound.ldap.endpoint configuration file.*/
 
-            ConfigurartionBuilder configurartionBuilder = new ConfigurartionBuilder();
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
 
-            configurartionBuilder.buildConfiguration(getLdapConfigurationFile());
+            configurationBuilder.buildConfiguration(getLdapConfigurationFile());
 
             /*Make relevant objects that encapsulate different parts of config file.*/
-            configurartionBuilder.buildLDAPEndpointConfigurartion();
+            configurationBuilder.buildLDAPEndpointConfigurartion();
 
-            boolean LdapEndpointEnabled = configurartionBuilder.isLdapEndpointEnabled();
+            boolean LdapEndpointEnabled = configurationBuilder.isLdapEndpointEnabled();
             //expose LDAP Endpoint only if ldap-org.wso2.carbon.identity.inbound.ldap.endpoint is enabled.
             if (LdapEndpointEnabled) {
 
-                EndPointConfiguration endPointConfiguration = configurartionBuilder.getEndPointConfiguration();
+                EndPointConfiguration endPointConfiguration = configurationBuilder.getEndPointConfiguration();
 
                 /*set the embedded-apacheds's schema location which is: carbon-home/repository/data/
                   is-default-schema.zip
@@ -75,7 +75,7 @@ public class LDAPEPComponent {
                 startLdapServer(endPointConfiguration);
 
                 /* replace default password with that is provided in the configuration file.*/
-                this.ldapServer.changeConnectionUserPassword(configurartionBuilder.getConnectionPassword());
+                this.ldapServer.changeConnectionUserPassword(configurationBuilder.getConnectionPassword());
 
 
                 if (log.isDebugEnabled()) {

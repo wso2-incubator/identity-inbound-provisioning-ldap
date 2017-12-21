@@ -24,21 +24,21 @@ import java.io.File;
 
 import static org.testng.Assert.assertEquals;
 
-public class ConfigurartionBuilderTest {
+public class ConfigurationBuilderTest {
 
-    private ConfigurartionBuilder configurartionBuilder;
+    private ConfigurationBuilder configurationBuilder;
 
     @BeforeTest
     public void setUp() throws Exception {
-        configurartionBuilder = new ConfigurartionBuilder();
-        configurartionBuilder.buildConfiguration(new File("src/test/resources/ldap-endpointconfig.xml"));
-        configurartionBuilder.buildLDAPEndpointConfigurartion();
+        configurationBuilder = new ConfigurationBuilder();
+        configurationBuilder.buildConfiguration(new File("src/test/resources/ldap-endpointconfig.xml"));
+        configurationBuilder.buildLDAPEndpointConfigurartion();
     }
 
     @Test
     public void testBuildLDAPEndpointConfigurartion() throws Exception {
 
-        EndPointConfiguration endPointConfiguration = configurartionBuilder.getEndPointConfiguration();
+        EndPointConfiguration endPointConfiguration = configurationBuilder.getEndPointConfiguration();
         assertEquals(endPointConfiguration.getEndpointPort(), 10390);
         assertEquals(endPointConfiguration.getInstanceId(), "default");
         assertEquals(endPointConfiguration.getMaxPDUSize(), 2000000);
@@ -53,12 +53,12 @@ public class ConfigurartionBuilderTest {
 
     @Test
     public void testGetConnectionPassword() throws Exception {
-        assertEquals(configurartionBuilder.getConnectionPassword(), "admin");
+        assertEquals(configurationBuilder.getConnectionPassword(), "admin");
     }
 
     @Test
     public void testIsEmbeddedLDAPEnabled() throws Exception {
-        assertEquals(configurartionBuilder.isLdapEndpointEnabled(), true);
+        assertEquals(configurationBuilder.isLdapEndpointEnabled(), true);
     }
 
 }

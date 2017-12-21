@@ -27,7 +27,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class ConfigurartionBuilder {
+public class ConfigurationBuilder {
 
     private String connectionPassword;
     private EndPointConfiguration endPointConfiguration;

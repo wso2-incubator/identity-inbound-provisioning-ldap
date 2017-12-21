@@ -21,6 +21,7 @@ import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.testng.PowerMockTestCase;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.wso2.carbon.base.CarbonBaseConstants;
@@ -63,6 +64,11 @@ public class IdentityLDAPManagerTest extends PowerMockTestCase {
         PrivilegedCarbonContext.startTenantFlow();
         PrivilegedCarbonContext.getThreadLocalCarbonContext().setUsername("admin");
         identityLDAPManager = new IdentityLDAPManager();
+    }
+
+    @AfterTest
+    public void afterTest() throws Exception {
+        PrivilegedCarbonContext.endTenantFlow();
     }
 
     @Test
