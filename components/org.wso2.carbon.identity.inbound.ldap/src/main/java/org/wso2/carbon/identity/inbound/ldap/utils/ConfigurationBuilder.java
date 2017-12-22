@@ -27,6 +27,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ * This class has been use for the read ldap endpoint configuration file.
+ */
 public class ConfigurationBuilder {
 
     private String connectionPassword;

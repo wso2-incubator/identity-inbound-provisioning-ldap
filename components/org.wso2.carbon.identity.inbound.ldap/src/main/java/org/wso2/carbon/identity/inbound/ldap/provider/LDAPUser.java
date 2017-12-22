@@ -22,6 +22,9 @@ import org.apache.directory.shared.ldap.entry.EntryAttribute;
 import java.util.HashMap;
 import java.util.Iterator;
 
+/**
+ * This class has been use for the set ldapUser attributes.
+ */
 public class LDAPUser {
 
     private String username;

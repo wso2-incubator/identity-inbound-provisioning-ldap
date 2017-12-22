@@ -27,6 +27,9 @@ import org.wso2.carbon.utils.multitenancy.MultitenantUtils;
 
 import java.util.HashMap;
 
+/**
+ * This class has been use for the mange ldap users with wso2 user store manager
+ */
 public class LDAPUserManager {
 
     private static final Log log = LogFactory.getLog(LDAPUserManager.class);
@@ -39,7 +42,6 @@ public class LDAPUserManager {
         carbonUM = carbonUserStoreManager;
         carbonClaimManager = claimManager;
         consumerName = username;
-        startTenantFlow();
     }
 
     private void startTenantFlow() {
@@ -59,6 +61,8 @@ public class LDAPUserManager {
             HashMap<String, String> claimsMap = (HashMap<String, String>) ldapAttributeMapper.getAddUserClaimsMap
                     (ldapUser.getUserAttributes());
 
+            startTenantFlow();
+
             if (carbonUM.isExistingUser(username)) {
                 String error = "User with the name : " + username + " already exist in the system";
                 log.info(error);
@@ -75,16 +79,23 @@ public class LDAPUserManager {
         } catch (UserStoreException e) {
             throw new IdentityLdapException("Error occurred while adding user", e);
         }
+        finally{
+            PrivilegedCarbonContext.endTenantFlow();
+        }
     }
 
     public void deleteUser(String userId) throws IdentityLdapException {
         try {
+            startTenantFlow();
             // Here assume (since id is unique per user) only one user exists for a given id
             carbonUM.deleteUser(userId);
             log.info("User: " + userId + " is deleted through LDAP.");
 
         } catch (UserStoreException ex) {
             throw new IdentityLdapException("Error occurred while deleting user", ex);
+        }
+        finally{
+            PrivilegedCarbonContext.endTenantFlow();
         }
     }
 

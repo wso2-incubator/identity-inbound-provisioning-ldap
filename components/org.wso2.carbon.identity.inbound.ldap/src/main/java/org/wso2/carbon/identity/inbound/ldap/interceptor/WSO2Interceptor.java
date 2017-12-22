@@ -28,6 +28,10 @@ import org.apache.directory.server.core.interceptor.context.ModifyOperationConte
 import org.apache.directory.server.core.interceptor.context.SearchOperationContext;
 import org.wso2.carbon.identity.inbound.ldap.impl.WSO2UserManager;
 
+/**
+ * This is the interceptor class. Which has been use for the capture ldap message content. Ldap message content has
+ * been pass with opContext parameter.
+ */
 public class WSO2Interceptor extends BaseInterceptor {
 
     private static final Log log = LogFactory.getLog(WSO2Interceptor.class);
@@ -43,15 +47,12 @@ public class WSO2Interceptor extends BaseInterceptor {
         } catch (Exception e) {
             String msg = "Error occur in AddOperationContext";
             log.error(msg, e);
+            throw new Exception(msg);
         }
     }
 
     public EntryFilteringCursor search(NextInterceptor next, SearchOperationContext opContext) throws Exception {
         return null;
-    }
-
-    public void modify(NextInterceptor next, ModifyOperationContext opContext) throws Exception {
-
     }
 
     public void delete(NextInterceptor next, DeleteOperationContext opContext) throws Exception {
@@ -61,6 +62,7 @@ public class WSO2Interceptor extends BaseInterceptor {
         } catch (Exception e) {
             String msg = "Error occur in DeleteOperationContext";
             log.error(msg, e);
+            throw new Exception(msg);
         }
     }
 

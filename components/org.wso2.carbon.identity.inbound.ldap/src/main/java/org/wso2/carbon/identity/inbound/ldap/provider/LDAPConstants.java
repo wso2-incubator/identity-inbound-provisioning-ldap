@@ -16,6 +16,9 @@
 
 package org.wso2.carbon.identity.inbound.ldap.provider;
 
+/**
+ * This class has been use for the introduce new ldap claim dialect for IS.
+ */
 public class LDAPConstants {
 
 

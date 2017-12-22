@@ -72,8 +72,7 @@ public class ApacheLDAPServer implements LDAPServer {
     }
 
     @Override
-    public void init(EndPointConfiguration configurations)
-            throws IdentityLdapException {
+    public void init(EndPointConfiguration configurations) throws IdentityLdapException {
 
         if (configurations == null) {
             log.error("LDAP org.wso2.carbon.identity.inbound.ldap.provider initialization failed. " +
@@ -98,8 +97,7 @@ public class ApacheLDAPServer implements LDAPServer {
     }
 
     @Override
-    public void start()
-            throws IdentityLdapException {
+    public void start() throws IdentityLdapException {
 
         try {
             this.service.startup();
@@ -114,8 +112,7 @@ public class ApacheLDAPServer implements LDAPServer {
     }
 
     @Override
-    public void stop()
-            throws IdentityLdapException {
+    public void stop() throws IdentityLdapException {
 
         try {
 
@@ -129,8 +126,7 @@ public class ApacheLDAPServer implements LDAPServer {
         }
     }
 
-    protected void initializeDefaultDirectoryService()
-            throws IdentityLdapException {
+    protected void initializeDefaultDirectoryService() throws IdentityLdapException {
         try {
 
             DirectoryServiceFactory factory = CarbonDirectoryServiceFactory.DEFAULT;
@@ -145,8 +141,7 @@ public class ApacheLDAPServer implements LDAPServer {
         }
     }
 
-    private AttributeType getAttributeType(String attributeName)
-            throws IdentityLdapException {
+    private AttributeType getAttributeType(String attributeName) throws IdentityLdapException {
         if (this.service != null) {
             SchemaManager schemaManager = this.service.getSchemaManager();
             if (schemaManager != null) {
@@ -183,8 +178,7 @@ public class ApacheLDAPServer implements LDAPServer {
     }
 
     @Override
-    public String getConnectionDomainName()
-            throws IdentityLdapException {
+    public String getConnectionDomainName() throws IdentityLdapException {
 
         LdapPrincipal adminPrinciple = null;
         try {
@@ -228,8 +222,7 @@ public class ApacheLDAPServer implements LDAPServer {
     }
 
     @Override
-    public void changeConnectionUserPassword(String password)
-            throws Exception {
+    public void changeConnectionUserPassword(String password) throws Exception {
 
         if (this.service != null) {
             CoreSession adminSession;
@@ -305,8 +298,7 @@ public class ApacheLDAPServer implements LDAPServer {
         }
     }
 
-    private void configureDirectoryService()
-            throws IdentityLdapException {
+    private void configureDirectoryService() throws IdentityLdapException {
 
         if (null == this.endPointConfigurations) {
             throw new IdentityLdapException("Directory service is not initialized.");

@@ -43,6 +43,7 @@ public class LDAPEPComponent {
     private static final Log log = LogFactory.getLog(LDAPEPComponent.class);
 
     private LDAPServer ldapServer;
+    private static final String APACHEDS_SCHEMA_LOCATION= "apacheds.schema.zip.store.location";
 
     @Activate
     public void activate(ComponentContext context) {
@@ -108,7 +109,7 @@ public class LDAPEPComponent {
         File dataDir = new File(getCarbonHome(), schemaLocation);
 
         // Set schema location
-        System.setProperty("schema.zip.store.location", dataDir.getAbsolutePath());
+        System.setProperty(APACHEDS_SCHEMA_LOCATION, dataDir.getAbsolutePath());
     }
 
     private String getCarbonHome() throws Exception {
@@ -129,8 +130,7 @@ public class LDAPEPComponent {
         return new File(getCarbonHome(), configurationFilePath);
     }
 
-    private void setWorkingDirectory(EndPointConfiguration endPointConfiguration)
-            throws Exception {
+    private void setWorkingDirectory(EndPointConfiguration endPointConfiguration) throws Exception {
 
         if (".".equals(endPointConfiguration.getWorkingDirectory())) {
             File dataDir = new File(getCarbonHome(), "repository/data");
@@ -154,8 +154,7 @@ public class LDAPEPComponent {
         }
     }
 
-    private void startLdapServer(EndPointConfiguration endPointConfiguration)
-            throws Exception {
+    private void startLdapServer(EndPointConfiguration endPointConfiguration) throws Exception {
 
         this.ldapServer = ApacheLDAPServer.getApacheLDAPServer();
 

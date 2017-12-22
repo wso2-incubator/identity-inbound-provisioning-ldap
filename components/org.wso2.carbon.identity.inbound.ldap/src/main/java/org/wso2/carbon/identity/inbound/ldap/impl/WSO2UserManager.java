@@ -27,6 +27,9 @@ import org.wso2.carbon.identity.inbound.ldap.provider.LDAPUser;
 import org.wso2.carbon.identity.inbound.ldap.provider.LDAPUserManager;
 import org.wso2.carbon.identity.inbound.ldap.utils.IdentityLdapException;
 
+/**
+ * This class has been use for the manage ldap users when it comes to interceptor level.
+ */
 public class WSO2UserManager {
 
     private static final Log log = LogFactory.getLog(WSO2UserManager.class);

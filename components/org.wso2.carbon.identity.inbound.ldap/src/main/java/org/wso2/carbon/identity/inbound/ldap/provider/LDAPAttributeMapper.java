@@ -23,6 +23,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * This class is use for the attached the ldap external claim to ladp attribute.
+ * After it will returns the attribute set as claim map.
+ */
 public class LDAPAttributeMapper {
 
     private static final Log log = LogFactory.getLog(LDAPAttributeMapper.class);

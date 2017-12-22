@@ -16,6 +16,9 @@
 
 package org.wso2.carbon.identity.inbound.ldap.impl;
 
+/**
+ * This class has been use for the set ldap configuration.
+ */
 public class EndPointConfiguration {
 
     private final static String DEFAULT_INSTANCE_ID = "default";

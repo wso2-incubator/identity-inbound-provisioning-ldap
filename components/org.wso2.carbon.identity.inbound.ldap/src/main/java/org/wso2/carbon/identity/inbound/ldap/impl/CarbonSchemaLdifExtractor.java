@@ -36,7 +36,6 @@ import java.util.zip.ZipInputStream;
  * This is a schema ldif file extractor. Given a zip file of schemas, following class will unzip
  * schemas to a folder called "schema" under working directory.
  */
-
 class CarbonSchemaLdifExtractor implements SchemaLdifExtractor {
 
     private static final String SCHEMA_SUB_DIR = "schema";
@@ -94,8 +93,7 @@ class CarbonSchemaLdifExtractor implements SchemaLdifExtractor {
     }
 
     @Override
-    public void extractOrCopy(boolean overwrite)
-            throws IOException {
+    public void extractOrCopy(boolean overwrite) throws IOException {
 
         if (schemaDirectory.exists() && overwrite) {
             // remove the existing schema directory
@@ -117,14 +115,13 @@ class CarbonSchemaLdifExtractor implements SchemaLdifExtractor {
         try {
             unzipSchemaFile();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IOException("Can't unzip schema file", e);
         }
 
         extracted = true;
     }
 
-    protected void unzipSchemaFile()
-            throws IOException, IdentityLdapException {
+    protected void unzipSchemaFile() throws IOException, IdentityLdapException {
         ZipInputStream zipFileStream = null;
 
         try {
@@ -180,8 +177,7 @@ class CarbonSchemaLdifExtractor implements SchemaLdifExtractor {
     }
 
     @Override
-    public void extractOrCopy()
-            throws IOException {
+    public void extractOrCopy() throws IOException {
         extractOrCopy(false);
     }
 }

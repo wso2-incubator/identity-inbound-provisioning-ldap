@@ -95,8 +95,7 @@ class CarbonDirectoryServiceFactory implements DirectoryServiceFactory {
      * {@inheritDoc}
      */
     @Override
-    public void init(String name)
-            throws Exception {
+    public void init(String name) throws Exception {
 
         this.schemaZipStore = System.getProperty("schema.zip.store.location");
 
@@ -134,8 +133,7 @@ class CarbonDirectoryServiceFactory implements DirectoryServiceFactory {
      *
      * @throws Exception If unable to extract schema files.
      */
-    private void initSchema()
-            throws Exception {
+    private void initSchema() throws Exception {
         SchemaPartition schemaPartition = directoryService.getSchemaService().getSchemaPartition();
 
         // Init the LdifPartition
@@ -177,8 +175,7 @@ class CarbonDirectoryServiceFactory implements DirectoryServiceFactory {
      *
      * @throws Exception the exception
      */
-    private void initSystemPartition()
-            throws Exception {
+    private void initSystemPartition() throws Exception {
         // change the working apacheds to something that is unique
         // on the system and somewhere either under target apacheds
         // or somewhere in a temp area of the machine.
@@ -202,8 +199,7 @@ class CarbonDirectoryServiceFactory implements DirectoryServiceFactory {
      * @throws Exception In case if unable to extract schema or if an error occurred when building
      *                   the working directory.
      */
-    private void build(String name)
-            throws Exception {
+    private void build(String name) throws Exception {
         directoryService.setInstanceId(name);
         buildWorkingDirectory(name);
 
@@ -218,8 +214,7 @@ class CarbonDirectoryServiceFactory implements DirectoryServiceFactory {
      * {@inheritDoc}
      */
     @Override
-    public DirectoryService getDirectoryService()
-            throws Exception {
+    public DirectoryService getDirectoryService() throws Exception {
         return directoryService;
     }
 
@@ -227,8 +222,7 @@ class CarbonDirectoryServiceFactory implements DirectoryServiceFactory {
      * {@inheritDoc}
      */
     @Override
-    public PartitionFactory getPartitionFactory()
-            throws Exception {
+    public PartitionFactory getPartitionFactory() throws Exception {
         return partitionFactory;
     }
 
