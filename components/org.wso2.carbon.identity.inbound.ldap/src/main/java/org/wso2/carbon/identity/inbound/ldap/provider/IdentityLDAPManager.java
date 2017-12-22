@@ -36,7 +36,7 @@ public class IdentityLDAPManager {
 
     public LDAPUserManager getUserManager() throws IdentityLdapException {
         LDAPUserManager ldapUserManager = null;
-        String username="carbon.super";
+        String username = "carbon.super";
         String tenantDomain = MultitenantUtils.getTenantDomain(username);
         String tenantLessUserName = MultitenantUtils.getTenantAwareUsername(username);
 

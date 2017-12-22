@@ -184,7 +184,7 @@ public class ApacheLDAPServer implements LDAPServer {
         try {
             adminPrinciple = getAdminPrinciple();
         } catch (Exception e) {
-            String msg="Can not get the connection domain name" ;
+            String msg = "Can not get the connection domain name";
             throw new IdentityLdapException(msg);
         }
         return adminPrinciple.getClonedName().getName();
@@ -195,7 +195,7 @@ public class ApacheLDAPServer implements LDAPServer {
 
         if (this.service != null) {
             CoreSession adminSession;
-                adminSession = getAdminSession(this.service);
+            adminSession = getAdminSession(this.service);
             if (adminSession != null) {
                 LdapPrincipal adminPrincipal = adminSession.getAuthenticatedPrincipal();
                 if (adminPrincipal != null) {
@@ -227,7 +227,7 @@ public class ApacheLDAPServer implements LDAPServer {
         if (this.service != null) {
             CoreSession adminSession;
 
-                adminSession = getAdminSession(this.service);
+            adminSession = getAdminSession(this.service);
 
             if (adminSession != null) {
                 LdapPrincipal adminPrincipal = adminSession.getAuthenticatedPrincipal();
@@ -240,23 +240,23 @@ public class ApacheLDAPServer implements LDAPServer {
                     try {
                         messageDigest = MessageDigest.getInstance(
                                 ConfigurationConstants.ADMIN_PASSWORD_ALGORITHM);
-                    messageDigest.update(password.getBytes());
-                    byte[] bytes = messageDigest.digest();
-                    String hash = Base64.encode(bytes);
-                    passwordToStore = passwordToStore + hash;
+                        messageDigest.update(password.getBytes());
+                        byte[] bytes = messageDigest.digest();
+                        String hash = Base64.encode(bytes);
+                        passwordToStore = passwordToStore + hash;
 
-                    adminPrincipal.setUserPassword(passwordToStore.getBytes());
+                        adminPrincipal.setUserPassword(passwordToStore.getBytes());
 
-                    EntryAttribute passwordAttribute = new DefaultServerAttribute(
-                            getAttributeType("userPassword"));
-                    passwordAttribute.add(passwordToStore.getBytes());
+                        EntryAttribute passwordAttribute = new DefaultServerAttribute(
+                                getAttributeType("userPassword"));
+                        passwordAttribute.add(passwordToStore.getBytes());
 
-                    ServerModification serverModification =
-                            new ServerModification(ModificationOperation.REPLACE_ATTRIBUTE,
-                                    passwordAttribute);
+                        ServerModification serverModification =
+                                new ServerModification(ModificationOperation.REPLACE_ATTRIBUTE,
+                                        passwordAttribute);
 
-                    List<Modification> modifiedList = new ArrayList<Modification>();
-                    modifiedList.add(serverModification);
+                        List<Modification> modifiedList = new ArrayList<Modification>();
+                        modifiedList.add(serverModification);
                         adminSession.modify(adminPrincipal.getClonedName(), modifiedList);
                     } catch (NoSuchAlgorithmException e) {
                         throw new IdentityLdapException(

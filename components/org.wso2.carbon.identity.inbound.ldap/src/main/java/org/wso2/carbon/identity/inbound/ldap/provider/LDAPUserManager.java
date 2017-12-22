@@ -34,9 +34,6 @@ public class LDAPUserManager {
 
     private static final Log log = LogFactory.getLog(LDAPUserManager.class);
     private UserStoreManager carbonUM = null;
-    private ClaimManager carbonClaimManager = null;
-    private String consumerName;
-
 
     public LDAPUserManager(UserStoreManager carbonUserStoreManager, String username, ClaimManager claimManager) {
         carbonUM = carbonUserStoreManager;
@@ -78,8 +75,7 @@ public class LDAPUserManager {
 
         } catch (UserStoreException e) {
             throw new IdentityLdapException("Error occurred while adding user", e);
-        }
-        finally{
+        } finally {
             PrivilegedCarbonContext.endTenantFlow();
         }
     }
@@ -93,8 +89,7 @@ public class LDAPUserManager {
 
         } catch (UserStoreException ex) {
             throw new IdentityLdapException("Error occurred while deleting user", ex);
-        }
-        finally{
+        } finally {
             PrivilegedCarbonContext.endTenantFlow();
         }
     }

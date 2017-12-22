@@ -41,9 +41,8 @@ import java.io.File;
 public class LDAPEPComponent {
 
     private static final Log log = LogFactory.getLog(LDAPEPComponent.class);
-
+    private static final String APACHEDS_SCHEMA_LOCATION = "apacheds.schema.zip.store.location";
     private LDAPServer ldapServer;
-    private static final String APACHEDS_SCHEMA_LOCATION= "apacheds.schema.zip.store.location";
 
     @Activate
     public void activate(ComponentContext context) {
